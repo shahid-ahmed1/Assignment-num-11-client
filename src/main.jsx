@@ -7,17 +7,37 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Home from './pages/Home.jsx';
+import Roots from './components/Roots.jsx';
+import Login from './components/Login.jsx';
+import Register from './components/Register.jsx';
+import AuthProvider from './provider/AuthProvider.jsx';
+import { ToastContainer } from 'react-toastify';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home></Home>,
+    element: <Roots></Roots>,
     children:[
-     
+     {
+      path:'/',
+      element:<Home></Home>
+     },
+     {
+      path:'/login',
+      element:<Login></Login>
+     },
+     {
+      path:'/register',
+      element:<Register></Register>
+     }
     ]
   },
 ]);
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-      <RouterProvider router={router} />
+    
+    <AuthProvider>
+    <RouterProvider router={router} />
+    </AuthProvider>
+<ToastContainer></ToastContainer>
   </StrictMode>,
 )
